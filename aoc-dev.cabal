@@ -30,7 +30,7 @@ common common-options
                      , base >=4.7 && <5
                      , bytestring
                      , constraints
-                     , constraints-extras < 0.4
+                     , constraints-extras
                      , containers
                      , criterion
                      , data-default-class
@@ -164,7 +164,7 @@ library
 
 executable aoc-dev
   import: common-options
-  main-is: aoc.hs
+  main-is: Main.hs
   hs-source-dirs:
       app
   build-depends:

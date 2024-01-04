@@ -17,7 +17,8 @@
 #
 # resolver: ./custom-snapshot.yaml
 # resolver: https://example.com/snapshots/2018-01-01.yaml
-resolver: lts-19.33
+resolver: lts-21.23
+# resolver: nightly-2023-12-08
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
@@ -38,8 +39,9 @@ packages:
 # using the same syntax as the packages field.
 # (e.g., acme-missiles-0.3)
 extra-deps:
-- advent-of-code-api-0.2.8.1
+# - advent-of-code-api-0.2.8.1
 - haskell-names-0.9.9
+# - advent-of-code-api-0.2.8.4
 
 allow-newer: true
 

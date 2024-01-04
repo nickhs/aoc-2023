@@ -1,31 +1,21 @@
 {
   description = "aoc-dev";
   inputs = {
-    haskellNix.url = "github:input-output-hk/haskell.nix";
-    nixpkgs.follows = "haskellNix/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
   };
-  outputs = { self, nixpkgs, flake-utils, haskellNix }:
-    flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ] (system:
-      let
-        overlays = [
-          haskellNix.overlay
-          (final: prev: {
-            aoc-dev = final.haskell-nix.project' {
-              name = "aoc-dev";
-              src = ./.;
-              compiler-nix-name = "ghc902";
-              shell.tools = {
-                cabal = { };
-                # hlint = {};
-                haskell-language-server = { };
-              };
-            };
-          })
-        ];
-        pkgs = import nixpkgs { inherit system overlays; inherit (haskellNix) config; };
-        flake = pkgs.aoc-dev.flake { };
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ] (system:
+      let pkgs = import nixpkgs { inherit system; };
       in
-      flake // { packages.default = flake.packages."aoc-dev:exe:aoc-dev"; }
+      { 
+        devShells.default = pkgs.mkShell { buildInputs = [ 
+          pkgs.stack 
+          pkgs.pkg-config # needed by digest
+          pkgs.zlib # needed by digest
+          pkgs.haskellPackages.haskell-language-server 
+          pkgs.haskellPackages.haskell-debug-adapter 
+          ]; };
+      }
     );
 }

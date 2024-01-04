@@ -29,13 +29,14 @@ data TestType :: Type -> Type where
 deriving stock instance Show (TestType a)
 instance GShow TestType where
     gshowsPrec = showsPrec
-instance ArgDict Show TestType where
-    type ConstraintsFor TestType Show = ()
+
+instance Has Show TestType where
+    -- type ConstraintsFor TestType Show = ()
     argDict = \case
       TTInt    -> Dict
       TTString -> Dict
-instance ArgDict (ComposeC Show Identity) TestType where
-    type ConstraintsFor TestType (ComposeC Show Identity) = ()
+instance Has (ComposeC Show Identity) TestType where
+    -- type ConstraintsFor TestType (ComposeC Show Identity) = ()
     argDict = \case
       TTInt    -> Dict
       TTString -> Dict

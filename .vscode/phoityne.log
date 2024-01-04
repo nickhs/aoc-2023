@@ -1,0 +1,3 @@
+2024-01-03 02:05:33.635582000000 [65390(ThreadId 19)] ERROR APP - <file descriptor: 79>: hPutChar: resource vanished (Broken pipe)
+2024-01-03 02:06:13.464051000000 [65621(ThreadId 19)] ERROR APP - <file descriptor: 79>: hPutChar: resource vanished (Broken pipe)
+2024-01-03 02:08:38.296129000000 [65858(ThreadId 19)] ERROR APP - <file descriptor: 79>: hPutChar: resource vanished (Broken pipe)
